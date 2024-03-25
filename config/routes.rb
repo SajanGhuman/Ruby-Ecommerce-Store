@@ -1,13 +1,12 @@
 Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-
-Rails.application.routes.draw do
+  root 'books#index'
   resources :books
-end
+  resources :categories do
+    resources :books, only: [:index]
+  end
 
-Rails.application.routes.draw do
-  resources :category
-end
-
+  get 'contact', to: 'contact#show'
+  get 'about', to: 'about#show'
 end

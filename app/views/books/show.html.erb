@@ -1,0 +1,18 @@
+<div class="container mx-auto py-8">
+  <div class="bg-white rounded-lg shadow-md">
+    <div class="overflow-hidden rounded-t-lg">
+     <% if @book.book_image.present? %>
+                    <%= image_tag(@book.book_image, class: "h-[80px] w-[80px]" ) %>
+                      <% else %>
+                         <%= image_tag("book_cover.png", class: "h-[80px] w-[80px]") %>
+                        <% end %>
+    </div>
+    <div class="p-6">
+      <h2 class="text-xl font-semibold mb-2"><%= @book.book_name %></h2>
+      <p class="text-gray-700 mb-4"><%= @book.book_desc %></p>
+      <p class="text-gray-600 mb-2">Author: <%= @book.book_author %></p>
+      <p class="text-gray-600 mb-2">Publisher: <%= @book.book_publisher %></p>
+      <p class="text-gray-600 mb-2">Genre: <%= @book.book_genre %></p>
+    </div>
+  </div>
+</div>
