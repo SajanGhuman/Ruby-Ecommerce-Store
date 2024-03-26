@@ -7,6 +7,6 @@ class Book < ApplicationRecord
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    ["book_author", "book_desc", "book_genre", "book_image", "book_name", "book_publisher", "category_id", "created_at", "id", "id_value", "updated_at"]
+    ["book_author", "book_desc", "book_image", "book_name", "book_publisher", "category_id", "created_at", "id", "id_value", "updated_at"]
   end
 end

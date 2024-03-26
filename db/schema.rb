@@ -76,8 +76,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_25_004634) do
     t.string "book_name"
     t.string "book_desc"
     t.string "book_author"
-    t.string "book_publisher"
     t.string "book_genre"
+    t.string "book_publisher"
     t.string "book_image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -92,8 +92,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_25_004634) do
 
   create_table "categories", force: :cascade do |t|
     t.string "category_name"
-    t.string "category_desc"
-    t.string "category_image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
