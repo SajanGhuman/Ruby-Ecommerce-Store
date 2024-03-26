@@ -79,6 +79,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_25_004634) do
     t.string "book_genre"
     t.string "book_publisher"
     t.string "book_image"
+    t.boolean "on_sale"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "category_id"

@@ -4,7 +4,7 @@ ActiveAdmin.register Book do
   remove_filter :image_attachment
   remove_filter :image_blob
 
-  # filter :category_id, as: :select, collection: Category.pluck(:category_name, :id)
+  filter :category_id, as: :select, collection: Category.pluck(:category_name, :id)
 
   form title: 'Edit Book' do |f|
     f.semantic_errors

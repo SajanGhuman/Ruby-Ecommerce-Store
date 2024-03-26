@@ -23,7 +23,7 @@
   end
 
 
-  50.times do
+  200.times do
     category = Category.offset(rand(Category.count)).first
     Book.create!(
       book_name: Faker::Book.title,
@@ -31,6 +31,7 @@
       book_author: Faker::Book.author,
       book_publisher: Faker::Book.publisher,
       book_genre: BOOK_GENRES.sample,
+      on_sale: [true, false].sample,
       category_id: category.id
     )
   end
@@ -48,6 +49,7 @@
       book_author: Faker::Book.author,
       book_publisher: Faker::Book.publisher,
       book_genre: row["category"],
+      on_sale: [true, false].sample,
       category_id: category.id
     ) 
 end

@@ -1,29 +1,65 @@
+<%= link_to root_path do %>
+  <%= image_tag("home.png", alt: "Show Cart", class: "w-[50px] h-[50px] absolute top-2 left-2") %>
+<% end %>
+
 <div class="container mx-auto py-8">
   <%= form_tag(books_path, method: "get", class: "mb-4") do %>
     <%= text_field_tag :search, params[:search], placeholder: "Search books...", class: "w-full border border-gray-300 rounded px-4 py-2" %>
     <%= submit_tag "Search", class: "mt-2 bg-blue-500 text-white px-4 py-2 rounded" %>
   <% end %>
-  <h1 class="text-3xl font-bold mb-6">All Books</h1>
-  <div class="absolute top-[240px]" ><%= paginate @books%></div>
+
+  <% current_filters = params[:filter].to_s.split(',') %>
+
+  <div class="flex space-x-4 my-4">
+    <%= link_to "Books on Sale", books_path(filter: (current_filters + ["on_sale"]).uniq.join(',')), class: "btn btn-primary" unless current_filters.include?("on_sale") %>
+    <%= link_to "New Books", books_path(filter: (current_filters + ["new"]).uniq.join(',')), class: "btn btn-primary" unless current_filters.include?("new") %>
+    <%= link_to "Recently Updated Books", books_path(filter: (current_filters + ["recently_updated"]).uniq.join(',')), class: "btn btn-primary" unless current_filters.include?("recently_updated") %>
+
+    <% current_filters.each do |filter| %>
+      <%= button_to filter.capitalize, books_path(filter: (current_filters - [filter]).join(',')), method: :get, class: "btn btn-secondary" %>
+    <% end %>
+  </div>
+
+<%= link_to show_cart_path do %>
+  <%= image_tag("show_cart.png", alt: "Show Cart", class: "w-[50px] h-[50px] absolute top-2 right-3") %>
+<% end %>
+  
+
+  <div class="flex justify-between items-center mb-4">
+    <h1 class="text-3xl font-bold">All Books</h1>
+  </div>
+
+  <div class="absolute top-[235px]">
+    <%= paginate @books %>
+  </div>
 
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
     <% @books.each do |book| %>
       <div class="bg-white rounded-lg shadow-md">
         <div class="overflow-hidden rounded-t-lg">
-           <% if book.book_image.attached? %>
-          <%= image_tag(book.book_image, class: "h-[80px] w-[80px]") %>
-        <% else %>
-          <%= image_tag("book_cover.png", class: "h-[80px] w-[80px]") %>
-        <% end %>
+          <% if book.book_image.attached? %>
+            <%= image_tag(book.book_image, class: "h-[80px] w-[80px]") %>
+          <% else %>
+            <%= image_tag("book_cover.png", class: "h-[80px] w-[80px]") %>
+          <% end %>
         </div>
         <div class="p-6">
-          <h2 class="text-xl font-semibold mb-2"><%= book.book_name %></h2>
-          <p class="text-gray-700 mb-4"><%= book.book_desc %></p>
-          <p class="text-gray-600 mb-2">Author: <%= book.book_author %></p> 
+          <h2 class="text-xl font-semibold mb-2">
+            <%= book.book_name %>
+          </h2>
+          <p class="text-gray-700 mb-4">
+            <%= book.book_desc %>
+          </p>
+          <p class="text-gray-600 mb-2">Author: <%= book.book_author %></p>
           <p class="text-gray-600 mb-2">Publisher: <%= book.book_publisher %></p>
           <p class="text-gray-600 mb-2">Genre: <%= book.book_genre %></p>
           <%= link_to "View Details", book_path(book), class: "text-blue-500 hover:underline" %>
+          <%= form_with(url: add_to_cart_path(book.id), method: "post", class: "add-to-cart-form") do |form| %>
+            <%= form.hidden_field :book_id, value: book.id %>
+            <%= form.submit "Add to Cart", class: "add-to-cart-button" %>
+          <% end %>
         </div>
       </div>
     <% end %>
   </div>
+</div>

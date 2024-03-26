@@ -7,7 +7,7 @@ class CreateBooks < ActiveRecord::Migration[7.1]
       t.string :book_genre
       t.string :book_publisher
       t.string :book_image
-      
+      t.boolean :on_sale
       t.timestamps
     end
   end
