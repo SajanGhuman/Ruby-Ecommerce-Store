@@ -1,7 +1,7 @@
   require 'csv'
 
   # Seed AdminUser
-  # AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
+  AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
 
   BOOK_GENRES = [
     "Science Fiction",

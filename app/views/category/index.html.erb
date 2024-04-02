@@ -1,3 +1,13 @@
+<nav class="bg-gray-800 h-[100px] shadow">
+<%= link_to root_path do %>
+  <%= image_tag("home.png", alt: "Show Cart", class: "w-[50px] h-[50px] absolute top-2 left-2") %>
+<% end %>
+          <%= link_to "About", about_path, class: "text-gray-300 px-3 py-2 rounded-md text-[20px] font-[20px]  absolute top-3 left-[60px]" %>
+          <%= link_to "Contact", contact_path, class: "text-gray-300 px-3 py-2 rounded-md text-[20px] font-[20px] absolute top-3 left-[130px]" %>
+          <%= link_to "Shop", books_path, class: "text-gray-300 px-3 py-2 rounded-md text-[20px] font-[20px] absolute top-3 left-[220px]" %>
+          <%= link_to "Cart", show_cart_path, class: "text-gray-300 px-3 py-2 rounded-md text-[20px] font-[20px] absolute top-3 left-[290px]" %>
+</nav>
+
 <div class="container mx-auto py-8">
   <%= form_tag(books_path, method: "get", class: "mb-4") do %>
     <%= text_field_tag :search, params[:search], placeholder: "Search books...", class: "w-full border border-gray-300 rounded px-4 py-2" %>
