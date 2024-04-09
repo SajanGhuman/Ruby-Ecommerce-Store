@@ -73,3 +73,5 @@ gem 'devise'
 gem 'sassc', '~> 2.0'
 gem 'activestorage'
 gem "tailwindcss-rails", "~> 2.3"
+
+gem "turbolinks", "~> 5.2"

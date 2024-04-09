@@ -2,18 +2,34 @@
 <html>
   <head>
     <title>FinalRails</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
-
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <%= javascript_include_tag "rails-ujs" %>
   </head>
 
-  <body>
-    <main class="container mx-auto mt-28 px-5 flex">
-      <%= yield %>
-    </main>
+  <body class="">
+    <div class="container mx-auto px-4">
+      <div class="py-6">
+        <h2 class="text-green-600 absolute left-[40%]"><%= notice %></h2>
+        <h2 class="text-red-600 absolute left-[40%]"><%= alert %></h2>
+
+        <% if user_signed_in? %>
+          <div class="mt-4">
+          <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "text-balck-500 bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded absolute right-20 top-4" %>
+          </div>
+        <% else %>
+          <div class="mt-4">
+            <%= link_to "Sign up", new_user_registration_path, class: "text-black-100 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded absolute right-20 top-4 rounded-full" %>
+            <%= link_to "Login", new_user_session_path, class: "text-black-100 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded absolute right-[180px] top-4 rounded-full" %>
+          </div>
+        <% end %>
+      </div>
+
+        <%= yield %>
+    </div>
   </body>
 </html>
