@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
-  devise_for :users
+  
+# config/routes.rb
+
+devise_for :users, controllers: { registrations: 'user_management/registrations' }
+
+
+
   post 'cart/add_to_cart/:id', to: 'cart#add_to_cart', as: 'add_to_cart'
   get 'cart/show_cart', to: 'cart#show_cart', as: 'show_cart'
   post 'cart/remove_from_cart/:book_id', to: 'cart#remove_from_cart', as: 'remove_from_cart'
