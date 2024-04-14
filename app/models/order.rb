@@ -4,4 +4,8 @@ class Order < ApplicationRecord
   validates :book_id, presence: true
   belongs_to :book
 
+  def invoice
+  
+  end
+
 end
