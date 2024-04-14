@@ -4,7 +4,7 @@ class Book < ApplicationRecord
   validates :book_author, presence: true, length: { maximum: 255 }
   validates :book_genre, presence: true, length: { maximum: 255 }
   validates :book_publisher, presence: true, length: { maximum: 255 }
-  validates :book_image, presence: true
+  # validates :book_image, presence: true
   validates :category_id, presence: true
   validates :on_sale, inclusion: { in: [true, false] }
 

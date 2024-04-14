@@ -1,0 +1,83 @@
+// Variables
+$primary-color: #3498db;
+$secondary-color: #ff6347;
+
+// Navbar styles
+.navbar {
+  background-color: $primary-color;
+  color: white;
+  padding: 1rem;
+}
+
+// Root link styles
+$root-link-img-size: 50px;
+.root-link {
+  img {
+    width: $root-link-img-size;
+    height: $root-link-img-size;
+    margin-right: 1rem;
+  }
+}
+
+// Container styles
+$container-padding: 2rem;
+$extra-padding: 1rem; // Additional padding for the container
+$total-padding: $container-padding + $extra-padding; // Calculating total padding
+
+$heading-font-size: 1.875rem;
+
+.container {
+  @apply mx-auto;
+  padding: $total-padding; // Using the calculated total padding for the container
+
+  h1 {
+    font-size: $heading-font-size;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+  }
+
+  // Shopping cart grid styles
+  .shopping-cart {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6;
+
+    .bg-white {
+      @apply rounded-lg shadow-md p-6;
+
+      // Book title styles
+      .text-xl {
+        font-weight: bold;
+        margin-bottom: 1rem;
+      }
+
+      // Book description styles
+      .text-gray-700 {
+        margin-bottom: 1rem;
+      }
+
+      // Quantity styles
+      .text-gray-600 {
+        color: #718096;
+        margin-bottom: 1rem;
+      }
+
+      // Quantity buttons styles
+      .quantity-buttons {
+        @apply flex justify-between mt-4;
+
+        // Increase and decrease button styles
+        .increase, .decrease {
+          @apply bg-blue-500 text-white px-2 py-1 rounded;
+        }
+
+        .decrease {
+          margin-left: 0.5rem;
+        }
+      }
+
+      // Remove link styles
+      .remove-link {
+        @apply text-red-500 hover:underline;
+      }
+    }
+  }
+}
