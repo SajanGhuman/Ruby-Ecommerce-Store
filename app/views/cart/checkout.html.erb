@@ -31,10 +31,6 @@
       <% end %>
       <p class="mb-2"><strong>Total with Tax:</strong> <%= number_to_currency(@total_with_taxes) %></p>
     </div>
-
-    <div class="flex justify-end">
-      <%= link_to "Confirm Purchase", checkout_path, class: "btn btn-primary" %>
-    </div>
   <% else %>
     <p class="text-gray-700">Your shopping cart is empty.</p>
   <% end %>

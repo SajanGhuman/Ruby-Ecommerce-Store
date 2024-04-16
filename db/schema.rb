@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_16_013022) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_16_045344) do
   create_table "abouts", force: :cascade do |t|
     t.string "title"
     t.text "content"
@@ -106,10 +106,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_16_013022) do
   end
 
   create_table "customers", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "province_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.integer "province_id"
     t.index ["province_id"], name: "index_customers_on_province_id"
     t.index ["user_id"], name: "index_customers_on_user_id"
   end
@@ -120,13 +120,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_16_013022) do
     t.integer "book_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id", null: false
-    t.integer "province_id", null: false
+    t.integer "user", null: false
+    t.integer "province", null: false
     t.integer "customer_id", null: false
     t.index ["book_id"], name: "index_orders_on_book_id"
     t.index ["customer_id"], name: "index_orders_on_customer_id"
-    t.index ["province_id"], name: "index_orders_on_province_id"
-    t.index ["user_id"], name: "index_orders_on_user_id"
+    t.index ["province"], name: "index_orders_on_province"
+    t.index ["user"], name: "index_orders_on_user"
   end
 
   create_table "provinces", force: :cascade do |t|
@@ -157,7 +157,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_16_013022) do
   add_foreign_key "customers", "users"
   add_foreign_key "orders", "books"
   add_foreign_key "orders", "customers"
-  add_foreign_key "orders", "provinces"
-  add_foreign_key "orders", "users"
+  add_foreign_key "orders", "provinces", column: "province"
+  add_foreign_key "orders", "users", column: "user"
   add_foreign_key "users", "provinces"
 end

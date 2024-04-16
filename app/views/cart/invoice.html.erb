@@ -1,0 +1,57 @@
+<%= render 'shared/navbar' %>
+
+<div class="container mx-auto py-8">
+  <h1 class="text-3xl font-bold mb-6">Checkout</h1>
+
+  <% if @cart.present? %>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6"> 
+      <div class="bg-white shadow-md rounded-lg p-6">
+        <h2 class="text-xl font-semibold mb-4">Order Details</h2>
+        <% @cart.each do |book_id, quantity| %>
+          <% book = Book.find(book_id) %>
+          <div class="flex items-center border-b border-gray-200 py-4">
+            <div class="ml-4 flex-1">
+              <h3 class="font-semibold text-lg"><%= book.book_name %></h3>
+              <p class="text-gray-600">Quantity: <%= quantity %></p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="bg-white shadow-md rounded-lg p-6">
+        <h2 class="text-xl font-semibold mb-4">Invoice</h2>
+        <p class="mb-2 text-[20px]"><strong>Total Price:</strong> <%= number_to_currency(@total_price) %></p>
+        <% if @pst_amount.present? && @pst_amount.positive? %>
+          <p class="mb-2 text-[20px]"><strong>Tax (PST):</strong> <%= number_to_currency(@pst_amount) %></p>
+        <% end %>
+        <% if @gst_amount.present? && @gst_amount.positive? %>
+          <p class="mb-2 text-[20px]"><strong>Tax (GST):</strong> <%= number_to_currency(@gst_amount) %></p>
+        <% end %>
+        <% if @hst_amount.present? && @hst_amount.positive? %>
+          <p class="mb-2 text-[20px]"><strong>Tax (HST):</strong> <%= number_to_currency(@hst_amount) %></p>
+        <% end %>
+        <p class="mb-2 text-[20px]"><strong>Total with Tax:</strong> <%= number_to_currency(@total_with_taxes) %></p>
+      </div>
+    </div><br>
+
+    <div class="bg-white shadow-md rounded-lg p-6">
+      <h2 class="text-xl font-semibold mb-4">Update Province</h2>
+      <%= form_for(@user, url: update_province_path, method: :patch) do |f| %>
+        <div class="mb-4">
+          <%= f.label :province_id, class: "block text-gray-700 font-bold mb-2" %>
+          <%= f.collection_select :province_id, Province.all, :id, :name, { prompt: "Select Province" }, class: "block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 rounded shadow" %>
+        </div>
+
+        <div class="flex items-center">
+          <%= f.submit "Update Province", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="flex justify-end">
+      <%= link_to "Confirm Purchase", checkout_path, class: "bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded-full shadow-md" %>
+    </div>
+  <% else %>
+    <p class="text-gray-700">Your shopping cart is empty.</p>
+  <% end %>
+</div>

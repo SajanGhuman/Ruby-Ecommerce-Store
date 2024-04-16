@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-  
-# config/routes.rb
+
 
 devise_for :users, controllers: { registrations: 'user_management/registrations' }
 
@@ -36,8 +35,14 @@ devise_for :users, controllers: { registrations: 'user_management/registrations'
   get 'contact', to: 'contact#show'
   get 'about', to: 'about#show'
 
-  Rails.application.routes.draw do
-    get '/checkout', to: 'cart#checkout'
+  get '/checkout', to: 'cart#checkout'
+  patch 'update_province', to: 'cart#update_province'
+  get '/invoice', to: 'cart#invoice', as: 'invoice'
+
+  resources :cart, only: [] do
+    collection do
+      post 'checkout'
+    end
   end
   
 end

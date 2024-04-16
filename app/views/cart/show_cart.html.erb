@@ -4,11 +4,11 @@
   <%= image_tag("home.png", alt: "Show Cart", class: "w-[50px] h-[50px] absolute top-2 left-2") %>
 <% end %>
 
+  <% if @cart.present? %>
 <div class="container mx-auto py-8">
   <h1 class="text-3xl font-bold mb-6">Shopping Cart</h1>
-   <%= link_to "Checkout", checkout_path, class: "btn btn-primary mt-4" %>
-
-  <% if @cart.present? %>
+   <%= link_to "Checkout", invoice_path, class: "bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded-full shadow-md" %>
+<br>
     <div class="shopping-cart">
       <% @cart.each do |book_id, quantity| %>
         <% book = Book.find(book_id) %>
