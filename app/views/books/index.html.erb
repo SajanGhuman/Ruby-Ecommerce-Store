@@ -36,9 +36,9 @@
       <div class="bg-white rounded-lg shadow-md">
         <div class="overflow-hidden rounded-t-lg">
           <% if book.book_image.attached? %>
-            <%= image_tag(book.book_image, class: "h-[80px] w-[80px]") %>
+            <%= image_tag(book.book_image, alt: "Book Cover", class: "h-[80px] w-[80px]") %>
           <% else %>
-            <%= image_tag("book_cover.png", class: "h-[80px] w-[80px]") %>
+            <%= image_tag("book_cover.png", alt: "Book Cover", class: "h-[80px] w-[80px]") %>
           <% end %>
         </div>
         <div class="p-6">
@@ -55,10 +55,12 @@
           <p class="text-gray-600 mb-2">Publisher: <%= book.book_publisher %></p>
           <p class="text-gray-600 mb-2">Genre: <%= book.book_genre %></p>
           <%= link_to "View Details", book_path(book), class: "text-blue-500 hover:underline" %>
-          <%= form_with(url: add_to_cart_path(book.id), method: "post", class: "add-to-cart-form") do |form| %>
-            <%= form.hidden_field :book_id, value: book.id %>
-            <%= form.submit "Add to Cart", class: "add-to-cart-button" %>
-          <% end %>
+<form action="<%= add_to_cart_path(book.id) %>" method="post" class="add-to-cart-form">
+  <input type="hidden" name="book_id" value="<%= book.id %>">
+  <input type="submit" value="Add to Cart" class="add-to-cart-button">
+</form>
+
+
         </div>
       </div>
     <% end %>

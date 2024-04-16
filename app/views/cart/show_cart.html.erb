@@ -19,13 +19,15 @@
           
           <div class="quantity-buttons mt-4">
             <div class="flex">
-              <%= form_tag increase_quantity_path(book_id), method: :post do %>
-                <%= button_tag "+", class: "increase" %>
-              <% end %>
+              <form action="<%= increase_quantity_path(book_id) %>" method="post">
+  <button type="submit" class="increase">+</button>
+</form>
+
               
-              <%= form_tag decrease_quantity_path(book_id), method: :post do %>
-                <%= button_tag "-", class: "decrease" %>
-              <% end %>
+              <form action="<%= decrease_quantity_path(book_id) %>" method="post">
+  <button type="submit" class="decrease">-</button>
+</form>
+
             </div>
             
             <%= link_to "Remove", remove_item_from_cart_path(book_id), method: :post, data: { confirm: 'Are you sure you want to remove this item from your cart?' }, class: "remove-link" %>

@@ -36,20 +36,26 @@
 
     <div class="bg-white shadow-md rounded-lg p-6">
       <h2 class="text-xl font-semibold mb-4">Update Province</h2>
-      <%= form_for(@user, url: update_province_path, method: :patch) do |f| %>
+      <form action="<%= update_province_path %>" method="post">
+        <input type="hidden" name="_method" value="patch">
         <div class="mb-4">
-          <%= f.label :province_id, class: "block text-gray-700 font-bold mb-2" %>
-          <%= f.collection_select :province_id, Province.all, :id, :name, { prompt: "Select Province" }, class: "block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 rounded shadow" %>
+          <label for="user_province_id" class="block text-gray-700 font-bold mb-2">Province</label>
+          <select name="user[province_id]" id="user_province_id" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 rounded shadow">
+            <option value="" <% unless @user.province_id %>selected<% end %> disabled>Select Province</option>
+            <% Province.all.each do |province| %>
+              <option value="<%= province.id %>" <%= 'selected' if @user.province_id == province.id %>><%= province.name %></option>
+            <% end %>
+          </select>
         </div>
 
         <div class="flex items-center">
-          <%= f.submit "Update Province", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+          <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Update Province</button>
         </div>
-      <% end %>
+      </form>
     </div>
 
     <div class="flex justify-end">
-    <%= link_to 'Proceed to checkout', show_payments_path(book_id: @book.id), class: "bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded-full shadow-md" %>
+      <%= link_to 'Proceed to checkout', show_payments_path(book_id: @book.id), class: "bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded-full shadow-md" %>
     </div>
 
   <% else %>
