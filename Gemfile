@@ -77,3 +77,5 @@ gem "tailwindcss-rails", "~> 2.3"
 gem "turbolinks", "~> 5.2"
 
 gem 'sass-rails'
+
+gem 'stripe'

@@ -20,14 +20,18 @@ class CartController < ApplicationController
   end
 
   def update_province
+    @cart = session[:cart] || {}
+    
     @user = current_user
     if @user.update(user_params)
       flash[:success] = "Province updated successfully."
+      session[:cart] = @cart
     else
       flash[:error] = "Failed to update province."
     end
     redirect_to invoice_path
   end
+  
   
  def user_params
     params.require(:user).permit(:province_id)
@@ -41,12 +45,12 @@ class CartController < ApplicationController
       @province_id = @user.province_id
       @province_name = Province.find(@province_id).name
       @tax_rates = TaxRates.load_rates[@province_name]
-  
+
       if @tax_rates.nil?
         flash.now[:error] = "Tax rates for your province are not found. Please contact support."
         return
       end
-  
+
       @pst_rate = @tax_rates['pst']
       @gst_rate = @tax_rates['gst']
       @hst_rate = @tax_rates['hst']
@@ -56,6 +60,21 @@ class CartController < ApplicationController
       @total_with_taxes = @total_price + @pst_amount + @gst_amount + @hst_amount
     else
       flash.now[:error] = "You must be logged in to view the invoice."
+    end
+  end
+
+  def checkout
+    @user = current_user
+    @cart = session[:cart] || {}
+    @total_price = calculate_total_price(@cart)
+    @province_id = @user.province_id
+    @province = Province.find(@province_id)
+    @province_name = @province.name
+    @tax_rates = TaxRates.load_rates[@province_name]
+
+    if @tax_rates.nil?
+      flash.now[:error] = "Tax rates for your province are not found. Please contact support."
+      return
     end
 
     @customer = Customer.create(user: @user, province: @province)
@@ -72,7 +91,7 @@ class CartController < ApplicationController
         customer: @customer
       )
       @customer.orders << order
-    end     
+    end
     session.delete(:cart)
   end
 
