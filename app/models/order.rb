@@ -3,9 +3,5 @@ class Order < ApplicationRecord
   validates :product_id, presence: true, length: { maximum: 255 }
   validates :book_id, presence: true
   belongs_to :book
-
-  def invoice
-  
-  end
-
+  belongs_to :customer
 end
