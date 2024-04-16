@@ -45,6 +45,7 @@ class CartController < ApplicationController
       @province_id = @user.province_id
       @province_name = Province.find(@province_id).name
       @tax_rates = TaxRates.load_rates[@province_name]
+      @book = Book.find(@cart.keys.first) unless @cart.empty?
 
       if @tax_rates.nil?
         flash.now[:error] = "Tax rates for your province are not found. Please contact support."
@@ -61,38 +62,6 @@ class CartController < ApplicationController
     else
       flash.now[:error] = "You must be logged in to view the invoice."
     end
-  end
-
-  def checkout
-    @user = current_user
-    @cart = session[:cart] || {}
-    @total_price = calculate_total_price(@cart)
-    @province_id = @user.province_id
-    @province = Province.find(@province_id)
-    @province_name = @province.name
-    @tax_rates = TaxRates.load_rates[@province_name]
-
-    if @tax_rates.nil?
-      flash.now[:error] = "Tax rates for your province are not found. Please contact support."
-      return
-    end
-
-    @customer = Customer.create(user: @user, province: @province)
-
-    @cart.each do |book_id, quantity|
-      book = Book.find(book_id)
-      order = Order.create(
-        order_id: SecureRandom.uuid,
-        book: book,
-        user: @user,
-        province: @province,
-        created_at: Time.zone.now,
-        updated_at: Time.zone.now,
-        customer: @customer
-      )
-      @customer.orders << order
-    end
-    session.delete(:cart)
   end
 
   private

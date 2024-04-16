@@ -78,4 +78,9 @@ gem "turbolinks", "~> 5.2"
 
 gem 'sass-rails'
 
-gem 'stripe'
+gem "stripe", "~> 10.0"
+
+gem "pay", "~> 7.0"
+
+gem 'dotenv-rails', groups: [:development, :test]
+gem 'stripe_event'

@@ -12,6 +12,8 @@ module FinalRails
     config.load_defaults 7.1
     # Enable the asset pipeline
     config.assets.enabled = true
+    # config/application.rb
+config.action_mailer.default_url_options = { host: "example.com" }
 
 
     # Please, add to the `ignore` list any other `lib` subdirectories that do

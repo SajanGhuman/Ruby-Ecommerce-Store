@@ -44,5 +44,16 @@ devise_for :users, controllers: { registrations: 'user_management/registrations'
       post 'checkout'
     end
   end
-  
+
+  resources :payments do
+    collection do
+      get 'success'
+      get 'cancel'
+    end
+  end
+
+  post 'payments/show', to: 'payments#show', as: 'show_payments'
+  match '/pay/webhooks/stripe', to: 'stripe_webhooks#handle_event', via: [:get, :post] 
+  post '/stripe/webhooks', to: 'stripe_webhooks#handle_event'
+
 end

@@ -49,8 +49,9 @@
     </div>
 
     <div class="flex justify-end">
-      <%= link_to "Confirm Purchase", checkout_path, class: "bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded-full shadow-md" %>
+    <%= link_to 'Proceed to checkout', show_payments_path(book_id: @book.id), class: "bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded-full shadow-md" %>
     </div>
+
   <% else %>
     <p class="text-gray-700">Your shopping cart is empty.</p>
   <% end %>
