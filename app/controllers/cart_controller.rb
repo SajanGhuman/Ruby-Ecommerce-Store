@@ -24,7 +24,8 @@ class CartController < ApplicationController
     @cart = session[:cart] || {}
     @total_price = calculate_total_price(@cart)
     @province_id = current_user.province_id
-    @tax_rates = TaxRates.load_rates[@province]
+    @province_name = Province.find(@province_id).name
+    @tax_rates = TaxRates.load_rates[@province_name]
 
 
     if @tax_rates.nil?

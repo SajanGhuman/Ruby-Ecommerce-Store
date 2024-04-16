@@ -20,13 +20,13 @@
     <div class="bg-white shadow-md rounded-lg p-6 mb-6">
       <h2 class="text-xl font-semibold mb-4">Invoice</h2>
       <p class="mb-2"><strong>Total Price:</strong> <%= number_to_currency(@total_price) %></p>
-      <% if @pst_amount.positive? %>
+      <% if @pst_amount.present? && @pst_amount.positive? %>
         <p class="mb-2"><strong>Tax (PST):</strong> <%= number_to_currency(@pst_amount) %></p>
       <% end %>
-      <% if @gst_amount.positive? %>
+      <% if @gst_amount.present? && @gst_amount.positive? %>
         <p class="mb-2"><strong>Tax (GST):</strong> <%= number_to_currency(@gst_amount) %></p>
       <% end %>
-      <% if @hst_amount.positive? %>
+      <% if @hst_amount.present? && @hst_amount.positive? %>
         <p class="mb-2"><strong>Tax (HST):</strong> <%= number_to_currency(@hst_amount) %></p>
       <% end %>
       <p class="mb-2"><strong>Total with Tax:</strong> <%= number_to_currency(@total_with_taxes) %></p>
