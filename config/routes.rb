@@ -35,4 +35,9 @@ devise_for :users, controllers: { registrations: 'user_management/registrations'
 
   get 'contact', to: 'contact#show'
   get 'about', to: 'about#show'
+
+  Rails.application.routes.draw do
+    get '/checkout', to: 'cart#checkout'
+  end
+  
 end

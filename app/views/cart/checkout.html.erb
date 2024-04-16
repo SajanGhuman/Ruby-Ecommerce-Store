@@ -1,0 +1,41 @@
+<%= render 'shared/navbar' %>
+
+<div class="container mx-auto py-8">
+  <h1 class="text-3xl font-bold mb-6">Checkout</h1>
+
+  <% if @cart.present? %>
+    <div class="bg-white shadow-md rounded-lg p-6 mb-6">
+      <h2 class="text-xl font-semibold mb-4">Shopping Cart</h2>
+      <% @cart.each do |book_id, quantity| %>
+        <% book = Book.find(book_id) %>
+        <div class="flex items-center border-b border-gray-200 py-4">
+          <div class="ml-4 flex-1">
+            <h3 class="font-semibold text-lg"><%= book.book_name %></h3>
+            <p class="text-gray-600">Quantity: <%= quantity %></p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="bg-white shadow-md rounded-lg p-6 mb-6">
+      <h2 class="text-xl font-semibold mb-4">Invoice</h2>
+      <p class="mb-2"><strong>Total Price:</strong> <%= number_to_currency(@total_price) %></p>
+      <% if @pst_amount.positive? %>
+        <p class="mb-2"><strong>Tax (PST):</strong> <%= number_to_currency(@pst_amount) %></p>
+      <% end %>
+      <% if @gst_amount.positive? %>
+        <p class="mb-2"><strong>Tax (GST):</strong> <%= number_to_currency(@gst_amount) %></p>
+      <% end %>
+      <% if @hst_amount.positive? %>
+        <p class="mb-2"><strong>Tax (HST):</strong> <%= number_to_currency(@hst_amount) %></p>
+      <% end %>
+      <p class="mb-2"><strong>Total with Tax:</strong> <%= number_to_currency(@total_with_taxes) %></p>
+    </div>
+
+    <div class="flex justify-end">
+      <%= link_to "Confirm Purchase", checkout_path, class: "btn btn-primary" %>
+    </div>
+  <% else %>
+    <p class="text-gray-700">Your shopping cart is empty.</p>
+  <% end %>
+</div>
