@@ -76,3 +76,20 @@
 # end
 
 
+# db/seeds.rb
+
+# db/seeds.rb
+
+# Load YAML file
+tax_rates_data = YAML.load_file(Rails.root.join('config', 'tax_rates.yml'))['tax_rates']
+
+# Seed TaxRates table
+tax_rates_data.each do |province, rates|
+  TaxRate.create!(
+    province: province,
+    pst: rates['pst'],
+    gst: rates['gst'],
+    hst: rates['hst']
+  )
+end
+

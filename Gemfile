@@ -84,3 +84,4 @@ gem "pay", "~> 7.0"
 
 gem 'dotenv-rails', groups: [:development, :test]
 gem 'stripe_event'
+gem 'pry-rails', group: :development
