@@ -14,7 +14,7 @@ class StripeWebhooksController < ApplicationController
       render json: { error: e.message }, status: :bad_request
       return
     rescue Stripe::SignatureVerificationError => e
-      render json: { error: e.message }, status: :bad_request
+      render json: {error: e.message}, status: :bad_request
       return
     end
 
