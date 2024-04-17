@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_16_104902) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_16_225627) do
   create_table "abouts", force: :cascade do |t|
     t.string "title"
     t.text "content"
@@ -125,6 +125,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_16_104902) do
     t.integer "customer_id", null: false
     t.string "status"
     t.string "payment_id"
+    t.string "shipping_status"
     t.index ["book_id"], name: "index_orders_on_book_id"
     t.index ["customer_id"], name: "index_orders_on_customer_id"
     t.index ["province"], name: "index_orders_on_province"

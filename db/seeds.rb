@@ -71,6 +71,8 @@
 
 
 
-Book.all.each do |book|
-  book.update(book_price: Faker::Number.decimal(l_digits: 2, r_digits: 2))
-end
+# Book.all.each do |book|
+#   book.update(book_price: Faker::Number.decimal(l_digits: 2, r_digits: 2))
+# end
+
+
