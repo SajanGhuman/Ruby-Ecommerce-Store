@@ -1,9 +1,7 @@
-// Variables
 $primary-color: #3498db;
 $secondary-color: #ff6347;
 $grey: #718096;
 
-// Navbar styles
 .navbar {
   background-color: $primary-color;
   color: white;
@@ -36,35 +34,29 @@ $heading-font-size: 1.875rem;
     margin-bottom: 1.5rem;
   }
 
-  // Shopping cart grid styles
   .shopping-cart {
     @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6;
 
     .bg-white {
       @apply rounded-lg shadow-md p-6;
 
-      // Book title styles
       .text-xl {
         font-weight: bold;
         margin-bottom: 1rem;
       }
 
-      // Book description styles
       .text-gray-700 {
         margin-bottom: 1rem;
       }
 
-      // Quantity styles
       .text-gray-600 {
         color: grey;
         margin-bottom: 1rem;
       }
 
-      // Quantity buttons styles
       .quantity-buttons {
         @apply flex justify-between mt-4;
 
-        // Increase and decrease button styles
         .increase, .decrease {
           @apply bg-blue-500 text-white px-2 py-1 rounded;
         }
@@ -74,7 +66,6 @@ $heading-font-size: 1.875rem;
         }
       }
 
-      // Remove link styles
       .remove-link {
         @apply text-red-500 hover:underline;
       }
