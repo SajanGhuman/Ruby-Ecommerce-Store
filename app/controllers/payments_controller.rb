@@ -48,8 +48,8 @@ class PaymentsController < ApplicationController
       book = Book.find(book_id)
       line_items << {
         price_data: {
-          unit_amount:  (book.book_price * 100).to_i,
-          currency:     "usd",
+          unit_amount:(book.book_price * 100).to_i,
+          currency: "usd",
           product_data: {
             name: book.book_name
           }
@@ -65,12 +65,12 @@ class PaymentsController < ApplicationController
     @checkout_session = current_user.payment_processor.checkout(
       mode:       "payment",
       line_items:,
-      metadata:   { order_ids: order_ids_string }
+      metadata:   {order_ids: order_ids_string}
     )
   end
 
   def success
-    flash[:success] = "Payment successful. Thank you for your purchase!"
+    flash[:success] = "Payment successful. Thank you for your purchase"
     redirect_to root_path
   end
 
