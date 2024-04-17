@@ -19,7 +19,7 @@
             <%= submit_tag "Add to Cart", class: "add-to-cart-button" %>
           <% end %>
           <% if @cart.key?(book.id) %>
-            <%= link_to "Remove", remove_from_cart_path(book.id), method: :post %>
+            <%= link_to "Remove", remove_from_cart_path( book.id ), method: :post %>
           <% end %>
     </div>
   <% end %>
