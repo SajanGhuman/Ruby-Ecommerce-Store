@@ -1,14 +1,11 @@
 class BooksController < ApplicationController
   def index
-    # Load all categories for use in the view
     @category = Category.all
 
-    # Load all books
     @books = Book.all
 
     @cart = session[:cart] || {}
 
-    # Apply additional filters
     if params[:filter].present?
       filters = params[:filter].split(",")
       filters.each do |filter|
@@ -25,14 +22,12 @@ class BooksController < ApplicationController
       end
     end
 
-    # Apply search filtering if search term is present
     if params[:search].present?
       search_term = "%#{params[:search].downcase}%"
       @books = @books.where("LOWER(book_name) LIKE ? OR LOWER(book_desc) LIKE ?", search_term,
                             search_term)
     end
 
-    # Paginate the books
     @books = @books.page(params[:page]).per(12)
   end
 
