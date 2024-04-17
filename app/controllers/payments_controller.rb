@@ -16,10 +16,31 @@ class PaymentsController < ApplicationController
       return
     end
   
-    session[:order_ids] ||= []
+  session[:order_ids] ||= []
   @customer = @user.customer || @user.create_customer(province: @province)
 
   @user.update(customer_id: @customer.id) if @user.present?
+
+  @cart.each do |book_id, quantity|
+    book = Book.find(book_id)
+  
+    order = Order.create(
+      order_id: SecureRandom.uuid,
+      book: book, 
+      customer_id: @customer.id,
+      user: @user.id,
+      province: @province_id,
+      status: "pending",
+      payment_id: "TBD",
+      shipping_status: "pending"
+    )
+  
+    if order.errors.any?
+      Rails.logger.error "Error creating order: #{order.errors.full_messages}"
+    else
+      session[:order_ids] << order.id 
+    end
+  end
   
     line_items = []
     order_ids = session[:order_ids] 
