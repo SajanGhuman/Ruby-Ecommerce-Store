@@ -1,0 +1,1 @@
+<%= f.input :category_ids, as: :select, collection: Category.pluck(:category_name, :id), include_blank: 'Select Category', multiple: true %>

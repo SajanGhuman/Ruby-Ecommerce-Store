@@ -1,11 +1,10 @@
 class CartController < ApplicationController
-  
   def add_to_cart
     book = Book.find(params[:id])
     session[:cart] ||= {}
     session[:cart][book.id] ||= 0
     session[:cart][book.id] += 1
-    redirect_to show_cart_path, notice: 'Book added to cart successfully.'
+    redirect_to show_cart_path, notice: "Book added to cart successfully."
   end
 
   def show_cart
@@ -16,12 +15,12 @@ class CartController < ApplicationController
     book_id = params[:book_id].to_i
     session[:cart].delete(book_id) if session[:cart].key?(book_id)
 
-    redirect_to show_cart_path, notice: 'Book removed from cart successfully.'
+    redirect_to show_cart_path, notice: "Book removed from cart successfully."
   end
 
   def update_province
     @cart = session[:cart] || {}
-    
+
     @user = current_user
     if @user.update(user_params)
       flash[:success] = "Province updated successfully."
@@ -31,11 +30,10 @@ class CartController < ApplicationController
     end
     redirect_to invoice_path
   end
-  
-  
- def user_params
+
+  def user_params
     params.require(:user).permit(:province_id)
-  end 
+  end
 
   def invoice
     if current_user
@@ -52,9 +50,9 @@ class CartController < ApplicationController
         return
       end
 
-      @pst_rate = @tax_rates['pst']
-      @gst_rate = @tax_rates['gst']
-      @hst_rate = @tax_rates['hst']
+      @pst_rate = @tax_rates["pst"]
+      @gst_rate = @tax_rates["gst"]
+      @hst_rate = @tax_rates["hst"]
       @pst_amount = @total_price * @pst_rate
       @gst_amount = @total_price * @gst_rate
       @hst_amount = @total_price * @hst_rate

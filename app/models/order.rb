@@ -6,9 +6,10 @@ class Order < ApplicationRecord
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    ["book_id", "created_at", "customer_id", "id", "id_value", "order_id", "payment_id", "product_id", "province", "shipping_status", "status", "updated_at", "user"]
+    ["book_id", "created_at", "customer_id", "id", "id_value", "order_id", "payment_id",
+     "product_id", "province", "shipping_status", "status", "updated_at", "user"]
   end
-  
+
   belongs_to :book
   belongs_to :customer
 end

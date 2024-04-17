@@ -1,5 +1,5 @@
 ActiveAdmin.register Book do
-  permit_params :book_name, :book_desc, :book_author, :book_publisher, :category_id, :book_image
+  permit_params :book_name, :book_desc, :book_author, :book_publisher, :book_image, category_ids: []
 
   remove_filter :image_attachment
   remove_filter :image_blob
@@ -12,9 +12,10 @@ ActiveAdmin.register Book do
     f.inputs "Book Details" do
       f.input :book_name
       f.input :book_desc
+      f.input :book_price
       f.input :book_author 
       f.input :book_publisher
-      f.input :category_id, as: :select, collection: Category.pluck(:category_name, :id), include_blank: false
+      f.input :category_ids, as: :select, collection: Category.pluck(:category_name, :id), include_blank: false, input_html: { multiple: true }
       f.input :book_image, as: :file
     end
     
@@ -32,4 +33,16 @@ ActiveAdmin.register Book do
       end
     end 
   end 
+
+  action_item :custom_javascript do
+    link_to "Custom JavaScript", "app/assets/javascripts/add_category.js"
+  end
+  
+  breadcrumb do
+    [
+      link_to('Admin', admin_root_path),
+      link_to('Books', admin_books_path)
+    ]
+  end
 end
+  

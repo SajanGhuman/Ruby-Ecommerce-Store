@@ -22,10 +22,9 @@ module UserManagement
         respond_with resource
       end
     end
-    
+
     def sign_up_params
       params.require(:user).permit(:email, :password, :password_confirmation, :province_id)
     end
-    
   end
 end

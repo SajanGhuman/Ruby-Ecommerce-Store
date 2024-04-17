@@ -6,7 +6,7 @@ class User < ApplicationRecord
   def create_customer
     Customer.create(user: self)
   end
-  
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 end

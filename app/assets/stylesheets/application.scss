@@ -1,6 +1,7 @@
 // Variables
 $primary-color: #3498db;
 $secondary-color: #ff6347;
+$grey: #718096;
 
 // Navbar styles
 .navbar {
@@ -19,16 +20,15 @@ $root-link-img-size: 50px;
   }
 }
 
-// Container styles
 $container-padding: 2rem;
-$extra-padding: 1rem; // Additional padding for the container
-$total-padding: $container-padding + $extra-padding; // Calculating total padding
+$extra-padding: 1rem;
+$total-padding: $container-padding + $extra-padding; 
 
 $heading-font-size: 1.875rem;
 
 .container {
   @apply mx-auto;
-  padding: $total-padding; // Using the calculated total padding for the container
+  padding: $total-padding; 
 
   h1 {
     font-size: $heading-font-size;
@@ -56,7 +56,7 @@ $heading-font-size: 1.875rem;
 
       // Quantity styles
       .text-gray-600 {
-        color: #718096;
+        color: grey;
         margin-bottom: 1rem;
       }
 

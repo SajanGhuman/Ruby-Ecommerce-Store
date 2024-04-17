@@ -5,4 +5,11 @@ ActiveAdmin.register Category do
     permitted
   end
   
+    form do |f|
+      f.inputs 'Category Details' do
+        f.input :category_name
+      end
+      f.actions
+    end
+  
 end
