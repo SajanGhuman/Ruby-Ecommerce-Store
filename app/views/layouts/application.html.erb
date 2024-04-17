@@ -19,7 +19,7 @@
         <h2 class="text-red-600 absolute left-[40%]"><%= alert %></h2>`
 
         <% if user_signed_in? %>
-          <div class="mt-4">clear
+          <div class="mt-4">
           <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "text-balck-500 bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded absolute right-20 top-4" %>
           </div>
         <% else %>
