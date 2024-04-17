@@ -13,23 +13,23 @@ tax_rates:
     hst: 0.0
   New Brunswick:
     pst: 0.0
-    gst: 0.05
+    gst: 0.0
     hst: 0.15
   Newfoundland and Labrador:
     pst: 0.0
-    gst: 0.05
+    gst: 0.0
     hst: 0.15
   Nova Scotia:
     pst: 0.0
-    gst: 0.05
+    gst: 0.0
     hst: 0.15
   Ontario:
     pst: 0.0
-    gst: 0.05
+    gst: 0.0
     hst: 0.13
   Prince Edward Island:
     pst: 0.0
-    gst: 0.05
+    gst: 0.0
     hst: 0.15
   Quebec:
     pst: 0.09975
